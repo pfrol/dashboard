@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'dashboard';
+  title = 'Dashboard';
+  navItems = [
+    {label: 'Accueil', path: 'home'},
+    {label: 'Quizzes', path: 'quizzes'},
+    {label: 'Admin', path: 'admin'},
+    {label: 'Login', path: 'login'}
+  ];
+
+
+
 }

@@ -1,0 +1,32 @@
+{
+  "modules": [
+    {
+      "id": 32,
+      "nom": "Eportal",
+      "description": "Desc Eportal",
+      "idGroupe":2,
+      "parametres":[]
+      },
+      {
+        "id": 1,
+        "nom": "Birt",
+        "description": "Desc birt",
+        "idGroupe":3,
+        "parametres":[]
+      },
+       {
+          "id": 2,
+          "nom": "FrontScreen",
+          "description": "Desc Eportal",
+          "idGroupe":2,
+          "parametres":[]
+          }
+  ],
+  "submissions": [],
+  "users": [
+    {
+      "name": "toto",
+      "password": "1234"
+    }
+  ]
+}
