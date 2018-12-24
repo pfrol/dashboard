@@ -13,8 +13,14 @@
       </div>
       <div *ngIf="!currentUser">
         <p>Vous n'êtes pas identifié.</p>
-        <p><button class="btn btn-danger" (click)="doLogin()">S'authentifier</button></p>
-      </div>
+        <form [formGroup]="loginForm" (ngSubmit)="doLogin()">
+          <label for="loginInput" style="display:flex">Login : </label>
+          <input id="loginInput" formControlName="login" class="form-control">
+          <label for="pwdInput" style="display:flex">Mot de passe : </label>
+          <input id="pwdInput" type="password" formControlName="password" class="form-control">
+          <p><button type="submit" class="btn btn-danger" >S'authentifier</button></p>
+        </form>
+       </div>
     </ng-template>
 
   </div>

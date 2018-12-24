@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -12,27 +13,32 @@ export class LoginComponent implements OnInit {
   // Component state
   isLoading = true;
   currentUser: User;
+  loginForm: FormGroup;
 
   constructor(private router: Router,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private pb: FormBuilder ) {
   }
 
   ngOnInit() {
+    this.loginForm = this.pb.group({
+      login: ['', Validators.required],
+      password : ['', Validators.required]
+    });
     this.authService.getCurrentUser()
       .subscribe(user => {
         this.currentUser = user;
         this.isLoading = false;
       },
         error => {
-          this.isLoading = false;
-        });
+          });
   }
 
   doLogin() {
     this.authService.signIn()
       .subscribe(user => {
         if (user) {
-          this.gotoAdmin();
+          // this.gotoAdmin();
         }
       });
   }
@@ -45,8 +51,8 @@ export class LoginComponent implements OnInit {
   }
 
   // Redirect the user to the admin homepage.
-  gotoAdmin(event?: Event) {
+  /*gotoAdmin(event?: Event) {
     if (event) { event.preventDefault(); }
     this.router.navigate(['/admin']);
-  }
+  }*/
 }

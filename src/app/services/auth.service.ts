@@ -9,15 +9,20 @@ import { DOCUMENT } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/map';
 
 import { User } from '../models/user';
+
+
 
 @Injectable()
 export class AuthService {
   private userObs = new ReplaySubject<User>(1);
   private isLoggedInObs = new ReplaySubject<boolean>(1);
 
-  constructor(@Inject(DOCUMENT) private document) {
+  constructor(@Inject(DOCUMENT) private document, 
+  @Inject('SETTINGS') private env: any,
+    private http: HttpClient) {
     this.checkCurrentUser();
   }
 
@@ -43,8 +48,9 @@ export class AuthService {
     this.isLoggedInObs.next(!!user);
   }
 
-  signIn(): Observable<User> {
-    const userData = {name: 'Bob', email: 'bob@bob.com'};
+  signIn(loginForm): Observable<User> {
+    const userData = this.http.( env.loginUrl, loginForm.value)
+    .map((data) => new User(data.datas.utilisateur)):
     this.setCookie('user', JSON.stringify(userData));
     this.checkCurrentUser();
     return Observable.of(new User(userData));

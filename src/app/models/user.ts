@@ -3,20 +3,28 @@
  * A user logged into the application.
  */
 export class User {
-  name: string;
-  email: string;
+  uid: string;
+  nom: string;
+  mail: string;
   photo: string;
   active: boolean;
+  locale: string;
+  
 
   constructor(options: {
-    name: string;
-    email: string;
+    uid: string;
+    nom: string;
+    mail: string;
     photo?: string;
     active?: boolean;
+    locale?: string
   }) {
-    this.name = options.name;
-    this.email = options.email;
+    this.uid = options.uid;
+    this.nom = options.nom;
+    this.mail = options.mail;
     this.photo = options.photo || '';
     this.active = options.active === undefined ? true : options.active;
+    this.locale = options.locale;
+
   }
 }
