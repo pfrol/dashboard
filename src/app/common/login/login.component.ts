@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.pb.group({
-      login: ['', Validators.required],
+      uid: ['', Validators.required],
       password : ['', Validators.required]
     });
     this.authService.getCurrentUser()
@@ -35,12 +35,13 @@ export class LoginComponent implements OnInit {
   }
 
   doLogin() {
-    this.authService.signIn()
+    this.authService.signIn(this.loginForm)
       .subscribe(user => {
         if (user) {
+          this.currentUser = user;
           // this.gotoAdmin();
         }
-      });
+      }, error => console.log(error));
   }
 
   doLogout() {

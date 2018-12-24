@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   backendUrl : '',
-  loginUrl : 'http://appco-qual-cl/appco-qual-cl/rest/login'
+  loginUrl : 'http://localhost:8485/planco/rest/login'
 };
 
 /*

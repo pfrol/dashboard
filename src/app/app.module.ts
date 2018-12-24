@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -31,11 +32,11 @@ const appRoutes: Routes = [
     LoginComponent
   ],
   imports: [
-    BrowserModule, ReactiveFormsModule,, RouterModule.forRoot(appRoutes)
+    BrowserModule, ReactiveFormsModule, HttpClientModule, RouterModule.forRoot(appRoutes)
   ],
   providers: [AuthService,
   AuthGuard,
-  {provide:'SETTING', useValue: environment}],
+  {provide: 'SETTING', useValue: environment}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

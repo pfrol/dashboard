@@ -15,7 +15,7 @@
         <p>Vous n'êtes pas identifié.</p>
         <form [formGroup]="loginForm" (ngSubmit)="doLogin()">
           <label for="loginInput" style="display:flex">Login : </label>
-          <input id="loginInput" formControlName="login" class="form-control">
+          <input id="loginInput" formControlName="uid" class="form-control">
           <label for="pwdInput" style="display:flex">Mot de passe : </label>
           <input id="pwdInput" type="password" formControlName="password" class="form-control">
           <p><button type="submit" class="btn btn-danger" >S'authentifier</button></p>
