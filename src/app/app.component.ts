@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { User } from './models/user';
+import { AuthService } from './services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,15 +9,24 @@ import { User } from './models/user';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Dashboard';
+  title = 'Skeleton';
   navItems = [
-    {label: 'Accueil', path: 'home'},
-  //  {label: 'Quizzes', path: 'quizzes'},
-    {label: 'Admin', path: 'admin'},
-    {label: 'Login', path: 'login'}
+    {label: 'Accueil', path: 'home', visible: 'always'},
+    {label: 'Admin', path: 'admin', visible: 'loggedIn'},
+    {label: 'Login', path: 'login', visible: 'loggedOut'}
   ];
-  user: User;
+  currentUser: User;
+  routes: Router;
+  logo = '/assets/pimkie_logo_white.svg';
 
+  constructor(private router: Router,
+    private authService: AuthService) {
+    this.authService.getCurrentUser().subscribe((usr) => this.currentUser = usr);
+  }
 
+  logout() {
+    this.authService.signOut();
+    // this.routes.navigate(['/login']);
+}
 
 }

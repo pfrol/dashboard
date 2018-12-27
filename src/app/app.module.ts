@@ -13,30 +13,39 @@ import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { environment } from 'src/environments/environment';
 
+
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' , },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent},
-  /*{
-    path: 'admin',
-    loadChildren: 'src/app/admin/admin.module#AdminModule',
-    //loadChildren=>lazyLoading, par contre le module doit etre précisé à la fin après le#
-    canActivate: [AuthGuard]
-  }*/
+  {
+    path: 'admin', // component: AdminComponent
+    loadChildren: 'src/app/admin/admin.module#AdminModule'
+    , canActivate: [AuthGuard]
+  }
 ];
 
 
 @NgModule({
   declarations: [
-    AppComponent, NavbarComponent, HomeComponent, FooterComponent,
-    LoginComponent
+    AppComponent,
+    NavbarComponent,
+    HomeComponent,
+    FooterComponent,
+    LoginComponent 
+    // AdminComponent
   ],
   imports: [
-    BrowserModule, ReactiveFormsModule, HttpClientModule, RouterModule.forRoot(appRoutes)
+    BrowserModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    //AdminModule,
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [AuthService,
-  AuthGuard,
-  {provide: 'SETTING', useValue: environment}],
+  providers: [
+    AuthService,
+    AuthGuard,
+    {provide: 'SETTING', useValue: environment}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,7 +5,7 @@
 
     <ng-template #showUI>
       <div *ngIf="currentUser">
-        <p>Vous êtes identifié en tant que {{ currentUser.name }} ({{ currentUser.email }}).</p>
+        <p>Vous êtes identifié en tant que {{ currentUser.nom }} ({{ currentUser.mail }}).</p>
         <p>
           <button class="btn btn-primary" (click)="gotoAdmin($event)">Accéder à l'admin</button>
           <button class="btn btn-default" (click)="doLogout()">Se déconnecter</button>

@@ -14,6 +14,7 @@ import 'rxjs/add/operator/map';
 import { User } from '../models/user';
 import { FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 
@@ -25,7 +26,8 @@ export class AuthService {
   private isLoggedInObs = new ReplaySubject<boolean>(1);
 
   constructor(@Inject(DOCUMENT) private document,
-  private htpp: HttpClient,
+  private http: HttpClient,
+  private routes: Router,
   @Inject('SETTING') private env: any) {
     this.checkCurrentUser();
   }
@@ -55,11 +57,13 @@ export class AuthService {
   signIn( loginForm: FormGroup): Observable<User> {
     const values: string = loginForm.value;
     const options = {headers: {'Accept': 'application/json'}};
-    const userData = this.htpp.post<User>( this.env.loginUrl, values, options)
-     .map((data: any) => new User(data.datas.utilisateur));
-
-     this.setCookie('user', JSON.stringify(userData));
-    this.checkCurrentUser();
+    const userData = this.http.post<User>( this.env.loginUrl, values, options)
+     .map((data: any) => {
+       const usr = new User(data.datas.utilisateur);
+       this.setCookie('user', JSON.stringify(usr));
+       this.checkCurrentUser();
+       return usr;
+     });
     return userData;
   }
 
@@ -67,6 +71,7 @@ export class AuthService {
     // console.log('deleteCookie');
     this.deleteCookie('user');
     this.checkCurrentUser();
+    this.routes.navigate(['login']);
     return Observable.of(undefined);
   }
 

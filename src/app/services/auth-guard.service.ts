@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import {Router, CanActivate } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
       .do((isSignedIn: boolean) => {
         if (isSignedIn === false) {
           alert('Vous devez être identifié pour accéder à cette page');
-          this.router.navigate(['/login']);
+          this.router.navigate(['login']);
         }
       });
   }

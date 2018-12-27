@@ -9,7 +9,6 @@ export class User {
   photo: string;
   active: boolean;
   locale: string;
-  
 
   constructor(options: {
     uid: string;
@@ -26,5 +25,19 @@ export class User {
     this.active = options.active === undefined ? true : options.active;
     this.locale = options.locale;
 
+  }
+
+  /**
+   * Return a JSON representation of the quiz
+   * which is compatible with our backend.
+   */
+  toJson() {
+    return {
+      id: this.uid,
+      nom: this.nom,
+      mail: this.mail,
+      active: this.active,
+      locale: this.locale
+    };
   }
 }

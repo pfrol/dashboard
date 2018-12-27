@@ -11,9 +11,11 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li *ngFor="let item of navItems"><a [routerLink]="item.path">{{ item.label }}</a></li>
+        <li *ngFor="let item of navItems" [hidden]="item.visible!=='always' 
+        && !(item.visible==='loggedIn' && currentUser)
+        && !(item.visible==='loggedOut' && !currentUser)"><a [routerLink]="item.path">{{ item.label }}</a></li>
       </ul>
-      <p class="navbar-text navbar-right">Identifié comme <a href="#" class="navbar-link">{{ user.nom }}</a></p>
+      <p class="navbar-text navbar-right">Identifié comme <a (click)="logOutFunction()" class="navbar-link">{{currentUser?.nom}}</a></p>
     </div><!--/.nav-collapse -->
   </div>
 </nav>

@@ -9,14 +9,15 @@ import { User } from 'src/app/models/user';
 })
 export class NavbarComponent implements OnInit {
 
-  @Input() logoImage = '/assets/logo_superquiz.png';
-
-  @Input() user: User;
+  @Input() logoImage = '/assets/pimkie_logo_white.svg';
+  currentUser: User;
+  @Input()logOutFunction: any;
   @Input() navItems: any[];
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private authService: AuthService) {
+    this.authService.getCurrentUser().subscribe((usr) => {this.currentUser = usr; console.log(usr); console.log(this.currentUser); });
   }
+
+  ngOnInit() {}
 
 }

@@ -18,7 +18,10 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router,
               private authService: AuthService,
               private pb: FormBuilder ) {
-  }
+                if (this.authService.getCurrentUser()) {
+                  this.router.navigate(['/']);
+              }
+              }
 
   ngOnInit() {
     this.loginForm = this.pb.group({
@@ -52,8 +55,8 @@ export class LoginComponent implements OnInit {
   }
 
   // Redirect the user to the admin homepage.
-  /*gotoAdmin(event?: Event) {
+  gotoAdmin(event?: Event) {
     if (event) { event.preventDefault(); }
-    this.router.navigate(['/admin']);
-  }*/
+    this.router.navigate(['admin']);
+  }
 }
